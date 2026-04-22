@@ -41,6 +41,9 @@ assign e_valE_o = (alu_fun == `ALUSUB) ? (aluB - aluA) : (alu_fun == `ALUAND) ? 
 
 
 always@(*) begin
+   new_cc[2] = 1;
+   new_cc[1] = 0;
+   new_cc[0] = 0;
    if(~rst_n_i ) begin
       new_cc[2] = 1;
       new_cc[1] = 0;
