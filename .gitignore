@@ -1,0 +1,4 @@
+# ModelSim simulation artifacts
+work/
+*.wlf
+transcript

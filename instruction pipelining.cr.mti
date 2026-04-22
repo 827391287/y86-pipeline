@@ -1,0 +1,105 @@
+{D:/modeltech64_2020.4/my design/instruction pipelining/fetch_tb.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/fetch_tb.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module tb
+
+Top level modules:
+	tb
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/F_pipe_reg.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/F_pipe_reg.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module F_pipe_reg
+
+Top level modules:
+	F_pipe_reg
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/execute_M_pipe_reg.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/execute_M_pipe_reg.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module execute_M_pipe_reg
+
+Top level modules:
+	execute_M_pipe_reg
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/fetch.v} {1 {vlog -work work -vopt -stats=none {D:\modeltech64_2020.4\my design\instruction pipelining\fetch.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module fetch
+
+Top level modules:
+	fetch
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/memory_access_W_pipe_reg.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/memory_access_W_pipe_reg.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module memory_access_W_pipe_reg
+
+Top level modules:
+	memory_access_W_pipe_reg
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/execute.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/execute.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module execute
+
+Top level modules:
+	execute
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/controller.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/controller.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module controller
+
+Top level modules:
+	controller
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/sel_fwd.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/sel_fwd.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module sel_fwd
+-- Compiling module fwd
+
+Top level modules:
+	sel_fwd
+	fwd
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/fetch_D_pipe_reg.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/fetch_D_pipe_reg.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module fetch_D_pipe_reg
+
+Top level modules:
+	fetch_D_pipe_reg
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/memory.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/memory.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module memory_access
+-- Compiling module ram
+
+Top level modules:
+	memory_access
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/decode_E_pipe_reg.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/decode_E_pipe_reg.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module decode_E_pipe_reg
+
+Top level modules:
+	decode_E_pipe_reg
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/select_pc.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/select_pc.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module select_pc
+
+Top level modules:
+	select_pc
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/define.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/define.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/writeback.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/writeback.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module writeback
+
+Top level modules:
+	writeback
+
+} {} {}} {D:/modeltech64_2020.4/my design/instruction pipelining/decode.v} {1 {vlog -work work -vopt -stats=none {D:/modeltech64_2020.4/my design/instruction pipelining/decode.v}
+Model Technology ModelSim SE-64 vlog 2020.4 Compiler 2020.10 Oct 13 2020
+-- Compiling module decode
+
+Top level modules:
+	decode
+
+} {} {}}
