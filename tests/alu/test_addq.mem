@@ -1,0 +1,16 @@
+// test_addq.mem — machine code for test_addq.ys
+// Generated from online simulator: https://boginw.github.io/js-y86-64/
+//
+// Program:
+//   irmovq $10, %rax   => 30 F0 0A 00 00 00 00 00 00 00  (addr 0x000)
+//   irmovq $4,  %rbx   => 30 F3 04 00 00 00 00 00 00 00  (addr 0x00A)
+//   addq   %rbx, %rax  => 60 30                          (addr 0x014)
+//   halt               => 00                             (addr 0x016)
+//
+// Expected result: %rax = 14
+
+@000
+30 F0 0A 00 00 00 00 00 00 00
+30 F3 04 00 00 00 00 00 00 00
+60 30
+00

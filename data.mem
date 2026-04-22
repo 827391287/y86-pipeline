@@ -1,0 +1,21 @@
+// data.mem — default data memory initialization
+// Used by: test_bubble_sort (array to be sorted)
+// For ALU/branch/hazard tests: these values are at low addresses (0-47)
+//   and do not conflict with test writes (which use addresses 100-200+)
+//
+// Array layout (64-bit little-endian integers):
+//   mem[0..7]   = 5   (0x0000000000000005)
+//   mem[8..15]  = 4   (0x0000000000000004)
+//   mem[16..23] = 12  (0x000000000000000C)
+//   mem[24..31] = 2   (0x0000000000000002)
+//   mem[32..39] = 1   (0x0000000000000001)
+//   mem[40..47] = 11  (0x000000000000000B)
+// After bubble_sort: [1, 2, 4, 5, 11, 12]
+
+@000
+05 00 00 00 00 00 00 00
+04 00 00 00 00 00 00 00
+0C 00 00 00 00 00 00 00
+02 00 00 00 00 00 00 00
+01 00 00 00 00 00 00 00
+0B 00 00 00 00 00 00 00
