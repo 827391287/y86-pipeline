@@ -1,0 +1,18 @@
+# Test: Execute-to-Execute (E->E) data forwarding
+# Covers: result of instruction N forwarded to instruction N+1
+#         No stall needed; forwarding unit provides value directly from E stage
+#
+# Pipeline behavior:
+#   Cycle N  : addq (%rax=15) in E stage, produces e_valE=15
+#   Cycle N+1: addq (%rcx) in E stage, needs %rax => forwarded from e_valE
+#
+# Expected result:
+#   %rax = 15  (10 + 5)
+#   %rcx = 15  (%rax forwarded correctly via E->E; wrong if forwarding missing: %rcx = 0)
+
+    irmovq $10, %rax
+    irmovq $5,  %rbx
+    irmovq $0,  %rcx
+    addq   %rbx, %rax    # %rax = 15  (PRODUCE in E stage)
+    addq   %rax, %rcx    # %rcx = 15  (CONSUME %rax via E->E forwarding)
+    halt

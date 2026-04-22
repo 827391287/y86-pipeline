@@ -1,0 +1,11 @@
+# Test: subq (subtraction)
+# Covers: subq result and condition codes
+#
+# Expected result:
+#   %rax = 7   (10 - 3)
+#   ZF=0, SF=0, OF=0
+
+    irmovq $10, %rax
+    irmovq $3,  %rbx
+    subq   %rbx, %rax
+    halt

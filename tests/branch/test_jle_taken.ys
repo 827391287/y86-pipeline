@@ -1,0 +1,20 @@
+# Test: jle branch TAKEN
+# Covers: conditional branch taken path, pipeline correctly flushes wrong-path instructions
+#
+# Condition: subq %rax, %rbx computes rbx - rax = 3 - 5 = -2
+#   SF=1, OF=0  =>  SF^OF = 1  =>  jle TAKEN
+#
+# Expected result:
+#   %rcx = 1   (taken path executed)
+
+    irmovq $5,  %rax
+    irmovq $3,  %rbx
+    irmovq $0,  %rcx
+    subq   %rax, %rbx    # rbx = 3 - 5 = -2, negative => jle taken
+    jle    taken
+    irmovq $99, %rcx     # skipped (wrong path)
+    jmp    done
+taken:
+    irmovq $1,  %rcx     # executed
+done:
+    halt

@@ -1,0 +1,21 @@
+# Test: Memory-to-Execute (M->E) data forwarding
+# Covers: result of instruction N forwarded to instruction N+2
+#         One instruction separates producer and consumer
+#
+# Pipeline behavior:
+#   Cycle N  : addq (%rax=15) in E, produces e_valE=15
+#   Cycle N+1: addq (%rax=15) in M, nop-like instr in E
+#   Cycle N+2: addq (%rdx) in E, needs %rax => forwarded from M stage (M_valE=15)
+#
+# Expected result:
+#   %rax = 15  (10 + 5)
+#   %rdx = 15  (%rax forwarded correctly via M->E; wrong if forwarding missing: %rdx = 0)
+
+    irmovq $10, %rax
+    irmovq $5,  %rbx
+    irmovq $0,  %rcx
+    irmovq $0,  %rdx
+    addq   %rbx, %rax    # %rax = 15  (PRODUCE)
+    irmovq $0,   %rsi    # 1 instruction gap (producer now in M stage)
+    addq   %rax, %rdx    # %rdx = 15  (CONSUME %rax via M->E forwarding)
+    halt

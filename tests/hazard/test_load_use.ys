@@ -1,0 +1,21 @@
+# Test: load-use hazard (stall)
+# Covers: mrmovq immediately followed by an instruction using the loaded register
+#         Controller must stall F+D stages for 1 cycle (insert bubble in E)
+#
+# Pipeline behavior:
+#   Cycle N  : mrmovq in E stage
+#   Cycle N+1: mrmovq in M stage, addq in D stage => hazard detected
+#              F_stall=1, D_stall=1, E_bubble=1 inserted
+#   Cycle N+2: mrmovq in W stage, addq gets correct %rbx via M->E forwarding
+#
+# Expected result:
+#   %rbx = 42  (correctly loaded from memory)
+#   %rcx = 42  (correctly uses loaded %rbx; wrong if stall missing: %rcx = 0)
+
+    irmovq $42,  %rax
+    irmovq $200, %rdx
+    rmmovq %rax, 0(%rdx)    # mem[200] = 42
+    irmovq $0,   %rcx
+    mrmovq 0(%rdx), %rbx    # LOAD:  %rbx = mem[200] = 42
+    addq   %rbx,  %rcx      # USE %rbx immediately => load-use hazard, stall 1 cycle
+    halt

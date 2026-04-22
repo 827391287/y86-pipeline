@@ -1,0 +1,16 @@
+# Test: mrmovq (load from memory to register)
+# Covers: read from data memory with base+offset addressing
+#
+# Expected result:
+#   %rcx = 77  (value stored to mem[100] and loaded back)
+#   %rdx = 77  (using non-zero offset: mrmovq 8(%rbx) loads mem[108])
+
+    irmovq $77,  %rax
+    irmovq $100, %rbx
+    rmmovq %rax, 0(%rbx)    # mem[100] = 77
+    rmmovq %rax, 8(%rbx)    # mem[108] = 77  (test non-zero offset)
+    irmovq $0,   %rcx
+    irmovq $0,   %rdx
+    mrmovq 0(%rbx), %rcx    # %rcx = mem[100] = 77
+    mrmovq 8(%rbx), %rdx    # %rdx = mem[108] = 77
+    halt

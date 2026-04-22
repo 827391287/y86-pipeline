@@ -1,0 +1,11 @@
+# Test: addq (addition)
+# Covers: basic ALU operation, condition code ZF/SF/OF
+#
+# Expected result:
+#   %rax = 14  (10 + 4)
+#   ZF=0, SF=0, OF=0
+
+    irmovq $10, %rax
+    irmovq $4,  %rbx
+    addq   %rbx, %rax
+    halt

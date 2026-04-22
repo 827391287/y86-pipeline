@@ -1,0 +1,14 @@
+# Test: call and ret (function call/return)
+# Covers: push return address, jump to callee, return to caller
+#
+# Expected result:
+#   %rax = 42  (set inside the called function)
+
+    irmovq $512, %rsp    # init stack pointer
+    irmovq $0,   %rax
+    call   func          # push return addr onto stack, jump to func
+    halt                 # execution returns here after ret
+
+func:
+    irmovq $42, %rax
+    ret                  # pop return addr, jump back to caller

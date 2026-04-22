@@ -1,0 +1,27 @@
+# Test: branch misprediction recovery
+# Covers: pipeline predicts jle TAKEN (fetches from 'taken' label),
+#         detects NOT TAKEN in E stage, flushes D+E (2 bubbles), resumes correctly
+#
+# This test is identical to test_jle_not_taken but focuses on verifying
+# that the 2 speculatively-fetched instructions are properly discarded.
+# Inspect waveform: E_bubble and D_bubble should both assert for 1 cycle.
+#
+# Condition: subq %rax, %rbx => rbx = 5 - 3 = 2 > 0 => jle NOT taken
+#
+# Expected result:
+#   %rcx = 99  (not-taken path)
+#   %rdx = 0   (poison write from taken path never committed)
+
+    irmovq $3,  %rax
+    irmovq $5,  %rbx
+    irmovq $0,  %rcx
+    irmovq $0,  %rdx
+    subq   %rax, %rbx    # rbx = 5 - 3 = 2 > 0 => jle NOT taken
+    jle    taken         # predict taken => fetch wrong instrs => flush
+    irmovq $99, %rcx     # correct path: executed
+    jmp    done
+taken:
+    irmovq $1,  %rdx     # wrong path: flushed, must NOT commit
+    irmovq $1,  %rcx     # wrong path: flushed, must NOT commit
+done:
+    halt

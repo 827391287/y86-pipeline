@@ -1,0 +1,11 @@
+# Test: jmp (unconditional jump)
+# Covers: always-taken jump, skipping instructions
+#
+# Expected result:
+#   %rax = 1   (poison value 99 is never executed)
+
+    irmovq $1,  %rax
+    jmp    done
+    irmovq $99, %rax    # should never execute
+done:
+    halt

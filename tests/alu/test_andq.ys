@@ -1,0 +1,11 @@
+# Test: andq (bitwise AND)
+# Covers: AND operation, non-zero result
+#
+# Expected result:
+#   %rax = 15  (0xFF & 0x0F = 0x0F = 15)
+#   ZF=0, SF=0, OF=0
+
+    irmovq $255, %rax
+    irmovq $15,  %rbx
+    andq   %rbx, %rax
+    halt

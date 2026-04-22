@@ -1,0 +1,79 @@
+# Test: bubble sort (comprehensive integration test)
+# Covers: ALU, memory read/write, call/ret, push/pop, conditional branch, loop
+#
+# Input array at memory address 0 (pre-initialized in data memory):
+#   mem[0..7]   = 5
+#   mem[8..15]  = 4
+#   mem[16..23] = 12
+#   mem[24..31] = 2
+#   mem[32..39] = 1
+#   mem[40..47] = 11
+#
+# Expected result after sort (ascending order):
+#   mem[0]  = 1
+#   mem[8]  = 2
+#   mem[16] = 4
+#   mem[24] = 5
+#   mem[32] = 11
+#   mem[40] = 12
+
+    irmovq $512, %rsp       # init stack pointer (above data region)
+    irmovq $0,   %rdi       # %rdi = base address of array
+    irmovq $6,   %rsi       # %rsi = array length = 6
+    call   bubble_sort
+    halt
+
+# void bubble_sort(long *data, long count)
+# %rdi = data (array base), %rsi = count
+bubble_sort:
+    pushq  %r8
+    pushq  %r9
+    pushq  %r10
+    pushq  %r11
+    pushq  %r12
+    pushq  %r13
+    pushq  %r14
+    irmovq $8,   %r8        # constant 8 (bytes per element)
+    rrmovq %rdi, %r9        # %r9 = last = data
+    addq   %rsi, %rsi       # rsi *= 2
+    addq   %rsi, %rsi       # rsi *= 4
+    addq   %rsi, %rsi       # rsi *= 8  (rsi = count * 8)
+    subq   %r8,  %rsi       # rsi = (count - 1) * 8
+    addq   %rsi, %r9        # %r9 = last = data + (count-1)*8
+
+L1:                         # outer loop: while last > data
+    rrmovq %r9,  %r10
+    subq   %rdi, %r10       # r10 = last - data
+    jle    L2               # if last <= data, done
+    rrmovq %rdi, %r11       # %r11 = i = data
+
+L3:                         # inner loop: while i < last
+    rrmovq %r9,  %r12
+    subq   %r11, %r12       # r12 = last - i
+    jle    L4               # if i >= last, end inner loop
+    mrmovq 0(%r11), %r12    # r12 = *i
+    mrmovq 8(%r11), %r13    # r13 = *(i+1)
+    rrmovq %r12, %r14
+    subq   %r13, %r14       # r14 = *i - *(i+1)
+    jle    L5               # if *i <= *(i+1), no swap needed
+    rrmovq %r13, %r14
+    rmmovq %r12, 8(%r11)    # *(i+1) = *i
+    rmmovq %r14, 0(%r11)    # *i = *(i+1)  (swap)
+
+L5:
+    addq   %r8, %r11        # i++ (advance by 8 bytes)
+    jmp    L3
+
+L4:
+    subq   %r8, %r9         # last-- (retreat by 8 bytes)
+    jmp    L1
+
+L2:                         # done
+    popq   %r14
+    popq   %r13
+    popq   %r12
+    popq   %r11
+    popq   %r10
+    popq   %r9
+    popq   %r8
+    ret
