@@ -1,0 +1,5 @@
+// Data memory initialization (all zeros for ALU-only tests)
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00
+00 00 00 00 00 00 00 00

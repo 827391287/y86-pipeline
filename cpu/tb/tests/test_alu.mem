@@ -1,0 +1,53 @@
+// test_alu: Basic ALU operations
+// Assembly:
+//   addi x1, x0, 10    # 0x00A00093  x1 = 10
+//   addi x2, x0, 7     # 0x00700113  x2 = 7
+//   add  x3, x1, x2    # 0x002081B3  x3 = 17
+//   sub  x4, x1, x2    # 0x40208233  x4 = 3
+//   and  x5, x1, x2    # 0x0020F2B3  x5 = 2
+//   or   x6, x1, x2    # 0x0020E333  x6 = 15
+//   xor  x7, x1, x2    # 0x0020C3B3  x7 = 13
+//   ebreak              # 0x00100073  halt
+//
+// Byte layout: little-endian, one byte per line
+
+// addi x1, x0, 10  (0x00A00093)
+93
+00
+A0
+00
+// addi x2, x0, 7   (0x00700113)
+13
+01
+70
+00
+// add x3, x1, x2   (0x002081B3)
+B3
+81
+20
+00
+// sub x4, x1, x2   (0x40208233)
+33
+82
+20
+40
+// and x5, x1, x2   (0x0020F2B3)
+B3
+F2
+20
+00
+// or x6, x1, x2    (0x0020E333)
+33
+E3
+20
+00
+// xor x7, x1, x2   (0x0020C3B3)
+B3
+C3
+20
+00
+// ebreak            (0x00100073)
+73
+00
+10
+00
