@@ -46,7 +46,7 @@ module controller(
     wire redirect = E_jalr_i || e_branch_taken_i;
 
     // ---- 异常传播 ----
-    wire exception = (m_stat_i == `SADR || m_stat_i == `SINS || m_stat_i == `SHLT) ||
+    wire exception = (m_stat_i == `SADR || m_stat_i == `SINS) ||
                      (W_stat_i == `SADR || W_stat_i == `SINS || W_stat_i == `SHLT);
 
     // ---- stall / bubble 生成 ----

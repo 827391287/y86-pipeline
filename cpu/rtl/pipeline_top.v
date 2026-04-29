@@ -95,7 +95,7 @@ module pipeline_top(
     wire [31:0] w_rd_val, w_rd_m_val;
     wire [2:0]  w_stat;
 
-    assign halt = (W_stat == `SHLT);
+    assign halt = (W_stat == `SHLT || W_stat == `SADR || W_stat == `SINS);
 
     // ---- F stage ----
     select_pc select_pc_inst(

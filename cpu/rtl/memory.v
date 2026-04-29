@@ -52,6 +52,13 @@ module memory_access(
         endcase
     end
 
+    // ---- 非对齐检测 ----
+    wire misalign =
+        (mem_re_i && mem_width_i == `F3_LW  && rd_val_i[1:0] != 2'b00) ||
+        (mem_re_i && (mem_width_i == `F3_LH  || mem_width_i == `F3_LHU) && rd_val_i[0] != 1'b0) ||
+        (mem_we_i && mem_width_i == `F3_SW  && rd_val_i[1:0] != 2'b00) ||
+        (mem_we_i && mem_width_i == `F3_SH  && rd_val_i[0]  != 1'b0);
+
     assign dmem_addr_o  = rd_val_i;
     assign dmem_wdata_o = wdata;
     assign dmem_we_o    = misalign ? 4'b0000 : we;
@@ -78,13 +85,6 @@ module memory_access(
             default: rd_m_val = dmem_rdata_i;
         endcase
     end
-
-    // ---- 非对齐检测 ----
-    wire misalign =
-        (mem_re_i && mem_width_i == `F3_LW  && rd_val_i[1:0] != 2'b00) ||
-        (mem_re_i && (mem_width_i == `F3_LH  || mem_width_i == `F3_LHU) && rd_val_i[0] != 1'b0) ||
-        (mem_we_i && mem_width_i == `F3_SW  && rd_val_i[1:0] != 2'b00) ||
-        (mem_we_i && mem_width_i == `F3_SH  && rd_val_i[0]  != 1'b0);
 
     assign rd_m_val_o = (mem_re_i && !misalign) ? rd_m_val : 32'h0;
     assign stat_o     = (dmem_error_i || misalign) ? `SADR : stat_i;

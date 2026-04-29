@@ -5,3 +5,6 @@ transcript
 sim/*.vvp
 sim/*.vcd
 *.vcd
+cpu/tb/tests/*/*.elf
+cpu/tb/tests/*/*.bin
+cpu/tb/test_config.v
